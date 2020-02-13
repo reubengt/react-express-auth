@@ -4,16 +4,22 @@
   "description": "",
   "main": "server/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:build": "NODE_ENV=test cd client && npm run build && cd ../server && nodemon server.js",
+    "db-init": "NODE_ENV=production node server/database/db_init.js",
+    "dev:db-init": "NODE_ENV=test node server/database/db_init.js",
+    "heroku-postbuild": "NODE_ENV=production cd client && npm i && npm run build && cd .. && npm i",
+    "start": "NODE_ENV=production node server/server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^7.18.1"
   },
   "devDependencies": {
+    "env2": "^2.2.2",
     "nodemon": "^2.0.2"
   }
 }
