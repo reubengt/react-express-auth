@@ -4,7 +4,7 @@ const url = require("url");
 const isTest = process.env.NODE_ENV === "test";
 const isProduction = process.env.NODE_ENV === "production";
 
-if (!isProduction) require("env2")(".env");
+if (!isProduction) require("env2")("./../.env");
 
 const DB_URL = isProduction ? process.env.DB_URL : process.env.DBTEST_URL;
 
