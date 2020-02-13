@@ -4,7 +4,7 @@ const LoginForm = () => {
     <form
       class="form login-form"
       autocomplete="off"
-      action="/login"
+      action="/api/login"
       method="post"
     >
       <label for="login-username">
@@ -17,7 +17,7 @@ const LoginForm = () => {
         id="login-username"
         placeholder="username"
         required
-        pattern="[a-z0-9]+"
+        pattern="[A-za-z0-9]+"
       ></input>
       <p id="login-username-err"></p>
       <input
@@ -27,7 +27,7 @@ const LoginForm = () => {
         placeholder="password"
         aria-label="enter login password"
         minlength="6"
-        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
+        pattern="[A-za-z0-9]+"
         required
       ></input>
       <p id="login-password-err"></p>

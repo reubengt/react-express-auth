@@ -1,13 +1,13 @@
 import React from "react";
-const LoginForm = () => {
+const CreateUserForm = () => {
   return (
     <form
       class="form create-form"
       autocomplete="off"
-      action="/newuser"
+      action="/api/createuser"
       method="post"
     >
-      <label for="new-username">Create a new username, young warrior!</label>
+      <label for="new-username">Create a new username</label>
       <br />
       <input
         type="text"
@@ -15,7 +15,7 @@ const LoginForm = () => {
         id="new-username"
         placeholder="username"
         required
-        pattern="[a-z0-9]+"
+        pattern="[A-za-z0-9]+"
       ></input>
       <p id="new-username-err"></p>
       <input
@@ -25,7 +25,7 @@ const LoginForm = () => {
         placeholder="password"
         aria-label="create a password"
         minlength="6"
-        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
+        pattern="[A-za-z0-9]+"
         required
       ></input>
       <p id="new-password-err"></p>
@@ -33,4 +33,4 @@ const LoginForm = () => {
     </form>
   );
 };
-export default LoginForm;
+export default CreateUserForm;
