@@ -1,29 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
 import {
   BroserRouter as Router,
   Route,
   Link,
   Redirect
-} from react-router-dom
+} from "react-router-dom";
+import LoginForm from "./components/LoginForm";
+import CreateUserForm from "./components/createUserForm";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <LoginForm />
+      <CreateUserForm />
     </div>
   );
 }
