@@ -13,11 +13,9 @@ router.post("/api/createuser", (req, res) => {
   checkExistingUsers(username)
     .then(resFromDB => {
       if (resFromDB.length > 0)
-        res
-          .status(400)
-          .send({
-            error: `User ${username} already exists. Please pick another username.`
-          });
+        res.status(400).send({
+          error: `User ${username} already exists. Please pick another username.`
+        });
       else {
         hashPassword(password)
           .then(hashedPassword => {
