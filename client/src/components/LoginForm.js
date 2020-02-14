@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import sendUserData from "../helpers/sendUserData";
 const LoginForm = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const handleUsernameChange = e => setUsername(e.target.value);
+  const handlePasswordChange = e => setPassword(e.target.value);
+
+  const handleSubmit = async event => {
+    event.preventDefault();
+    const response = await sendUserData("/api/login", {
+      username,
+      password
+    });
+    const responseJson = await response.json();
+    if (response.status !== 202) {
+      setError(responseJson.error);
+    } else {
+      console.log("creating user successful");
+    }
+  };
   return (
-    <form
-      class="form login-form"
-      autocomplete="off"
-      action="/api/login"
-      method="post"
-    >
+    <form class="form login-form" autocomplete="off" onSubmit={handleSubmit}>
       <label for="login-username">
         Welcome Back, Enter your username to continue!
       </label>
@@ -18,8 +33,10 @@ const LoginForm = () => {
         placeholder="username"
         required
         pattern="[A-za-z0-9]+"
+        value={username}
+        onChange={handleUsernameChange}
       ></input>
-      <p id="login-username-err"></p>
+      <p id="login-username-err">{error}</p>
       <input
         type="password"
         name="password"
@@ -29,8 +46,10 @@ const LoginForm = () => {
         minlength="6"
         pattern="[A-za-z0-9]+"
         required
+        value={password}
+        onChange={handlePasswordChange}
       ></input>
-      <p id="login-password-err"></p>
+      <p id="login-password-err">{error}</p>
       <input type="submit" value="GO"></input>
     </form>
   );
