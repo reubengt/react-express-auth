@@ -2,7 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import {
-  BroserRouter as Router,
+  BrowserRouter as Router,
   Route,
   Link,
   Redirect
