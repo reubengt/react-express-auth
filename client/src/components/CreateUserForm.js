@@ -35,7 +35,7 @@ const CreateUserForm = () => {
         value={username}
         onChange={handleUsernameChange}
       ></input>
-      <p id="new-username-err">{error}</p>
+
       <input
         type="password"
         name="password"
@@ -48,7 +48,7 @@ const CreateUserForm = () => {
         value={password}
         onChange={handlePasswordChange}
       ></input>
-      <p id="new-password-err">{error}</p>
+      <p id="createuser-err">{error}</p>
       <input type="submit" value="GO"></input>
     </form>
   );

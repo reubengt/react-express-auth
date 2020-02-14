@@ -17,7 +17,7 @@ const LoginForm = () => {
       const responseJson = await response.json();
       setError(responseJson.error);
     } else {
-      console.log("creating user successful");
+      console.log("login successful");
     }
   };
   return (
@@ -36,7 +36,6 @@ const LoginForm = () => {
         value={username}
         onChange={handleUsernameChange}
       ></input>
-      <p id="login-username-err">{error}</p>
       <input
         type="password"
         name="password"
@@ -49,7 +48,7 @@ const LoginForm = () => {
         value={password}
         onChange={handlePasswordChange}
       ></input>
-      <p id="login-password-err">{error}</p>
+      <p id="login-err">{error}</p>
       <input type="submit" value="GO"></input>
     </form>
   );
