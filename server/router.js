@@ -12,7 +12,12 @@ router.post("/api/createuser", (req, res) => {
   const { username, password } = req.body;
   checkExistingUsers(username)
     .then(resFromDB => {
-      if (resFromDB.length > 0) res.send("User Already Exists");
+      if (resFromDB.length > 0)
+        res
+          .status(400)
+          .send({
+            error: `User ${username} already exists. Please pick another username.`
+          });
       else {
         hashPassword(password)
           .then(hashedPassword => {
@@ -23,7 +28,7 @@ router.post("/api/createuser", (req, res) => {
           .catch(passwordHashErr => console.log);
         const jwt = createJWT(username);
         res.cookie("jwt", jwt, { httpOnly: true });
-        res.send("created a user and logged in!");
+        res.status(201).end();
       }
     })
     .catch(err => console.log);
@@ -34,7 +39,10 @@ router.post("/api/login", (req, res) => {
   cookieObj = req.cookies;
   getStoredPassword(username)
     .then(responseFromDB => {
-      if (responseFromDB.length === 0) res.send("User not found");
+      if (responseFromDB.length === 0)
+        res.status(400).send({
+          error: "User not found. Are you sure that's the right username?"
+        });
       const { hashed_password } = responseFromDB[0];
       comparePasswords(password, hashed_password)
         .then(match => {
@@ -43,9 +51,12 @@ router.post("/api/login", (req, res) => {
             res.cookie("jwt", jwt, {
               httpOnly: true
             });
-            res.send("logged in!");
+            res.status(200).end();
           } else {
-            res.send("password invalid");
+            res.status(400).send({
+              error:
+                "Sorry, your password was incorrect. Please double-check your password."
+            });
           }
         })
         .catch(passwordMatchErr => console.log);
