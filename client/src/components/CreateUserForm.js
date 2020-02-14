@@ -13,8 +13,8 @@ const CreateUserForm = () => {
       username,
       password
     });
-    const responseJson = await response.json();
     if (response.status !== 201) {
+      const responseJson = await response.json();
       setError(responseJson.error);
     } else {
       console.log("creating user successful");
